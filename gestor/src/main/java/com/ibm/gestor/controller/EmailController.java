@@ -1,11 +1,17 @@
 package com.ibm.gestor.controller;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import com.ibm.gestor.service.SendEmailService;
+
 
 @RestController
 @RequestMapping("/email")
 public class EmailController {
 
     @Autowired
-    private EmailService emailService;
+    private SendEmailService emailService;
 
     @PostMapping("/enviar")
     public ResponseEntity<String> enviar(
