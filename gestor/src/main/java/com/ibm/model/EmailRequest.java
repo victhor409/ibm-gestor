@@ -9,4 +9,5 @@ public class EmailRequest {
     private String para;
     private String assunto;
     private String corpo;
+    private String path_anexo;
 }
