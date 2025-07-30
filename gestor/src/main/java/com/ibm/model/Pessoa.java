@@ -7,8 +7,7 @@ import lombok.Setter;
 
 import java.io.Serializable;
 
-@Entity
-@Table(name = "TB_PESSOAS")
+
 @Getter
 @Setter
 public class Pessoa implements Serializable {
@@ -21,6 +20,5 @@ public class Pessoa implements Serializable {
     private String email;
     private String endereco;
     private String telefone;
-    private sexo sexo;
 
 }

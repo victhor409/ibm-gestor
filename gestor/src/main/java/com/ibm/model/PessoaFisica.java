@@ -14,5 +14,6 @@ public class PessoaFisica extends Pessoa {
 
     @Column(unique = true)
     private String cpf;
+    private sexo sexo;
 
 }
