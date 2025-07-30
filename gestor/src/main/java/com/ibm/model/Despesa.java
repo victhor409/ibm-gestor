@@ -1,8 +1,7 @@
 package com.ibm.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,6 +19,10 @@ public class Despesa {
     private BigDecimal valor;
     private String origemEntrada;
     private LocalDateTime dataEntrada;
+
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "Pessoa_id")
     private Pessoa pessoa;
 
 }

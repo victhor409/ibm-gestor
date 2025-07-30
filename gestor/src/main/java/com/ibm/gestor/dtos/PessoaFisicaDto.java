@@ -3,7 +3,11 @@ package com.ibm.gestor.dtos;
 
 import com.ibm.model.sexo;
 import jakarta.validation.constraints.NotBlank;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class PessoaFisicaDto {
 
     @NotBlank
