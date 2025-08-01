@@ -1,7 +1,7 @@
 package com.ibm.gestor.service;
 
 import com.ibm.gestor.repositories.DespesaRepository;
-import com.ibm.model.Despesa;
+import com.ibm.gestor.model.Despesa;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

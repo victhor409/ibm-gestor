@@ -1,12 +1,8 @@
-package com.ibm.model;
+package com.ibm.gestor.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 @Entity
 @Table(name = "TB_PESSOAFISICA")
@@ -16,7 +12,7 @@ public class PessoaFisica extends Pessoa {
 
     @Column(unique = true)
     private String cpf;
+    @Enumerated(EnumType.STRING)
     private sexo sexo;
-
 
 }

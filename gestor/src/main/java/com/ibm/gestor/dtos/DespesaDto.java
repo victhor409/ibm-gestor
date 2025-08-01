@@ -1,6 +1,5 @@
 package com.ibm.gestor.dtos;
 
-import com.ibm.model.Pessoa;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

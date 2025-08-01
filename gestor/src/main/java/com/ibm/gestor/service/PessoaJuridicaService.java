@@ -1,7 +1,7 @@
 package com.ibm.gestor.service;
 
 import com.ibm.gestor.repositories.PessoaJuridicaRepository;
-import com.ibm.model.PessoaJuridica;
+import com.ibm.gestor.model.PessoaJuridica;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;

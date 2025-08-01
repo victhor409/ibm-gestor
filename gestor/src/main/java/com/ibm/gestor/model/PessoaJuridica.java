@@ -1,4 +1,4 @@
-package com.ibm.model;
+package com.ibm.gestor.model;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

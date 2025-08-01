@@ -1,7 +1,7 @@
 package com.ibm.gestor.service;
 
 import com.ibm.gestor.repositories.PessoaFisicaRepository;
-import com.ibm.model.PessoaFisica;
+import com.ibm.gestor.model.PessoaFisica;
 import jakarta.transaction.Transactional;
 import org.springframework.data.domain.Page;
 import org.springframework.beans.factory.annotation.Autowired;

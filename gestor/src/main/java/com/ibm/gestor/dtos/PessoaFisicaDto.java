@@ -1,7 +1,7 @@
 package com.ibm.gestor.dtos;
 
 
-import com.ibm.model.sexo;
+import com.ibm.gestor.model.sexo;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;

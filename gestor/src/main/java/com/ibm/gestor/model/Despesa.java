@@ -1,4 +1,4 @@
-package com.ibm.model;
+package com.ibm.gestor.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
@@ -9,13 +9,13 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "TB_RECEITAS")
+@Table(name = "TB_DESPESAS")
 @Getter
 @Setter
-public class Receita {
+public class Despesa {
     @Id
     private Long id;
-    private String nomeReceita;
+    private String nomeDespesa;
     private BigDecimal valor;
     private String origemEntrada;
     private LocalDateTime dataEntrada;

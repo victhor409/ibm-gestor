@@ -1,7 +1,9 @@
 package com.ibm.gestor.controller;
 
+import com.ibm.gestor.dtos.ReceitaDto;
 import com.ibm.gestor.service.ReceitaService;
-import com.ibm.model.Receita;
+import com.ibm.gestor.model.Receita;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.domain.Page;
@@ -10,9 +12,7 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
@@ -35,6 +35,21 @@ public class ReceitaController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
         }
         return ResponseEntity.status(HttpStatus.OK).body(receitaOptional.get());
+    }
+
+    @PostMapping
+    public ResponseEntity<Receita> createReceita(@RequestBody @Valid ReceitaDto receitaDto) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(receitaService.save(receitaDto));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteReceita(@PathVariable(value = "id") Long id) {
+        Optional<Receita> receitaOptional = receitaService.getById(id);
+        if(receitaOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
+        }
+        receitaService.delete(receitaOptional.get());
+        return ResponseEntity.status(HttpStatus.OK).body("Receita deletada.");
     }
 
 }

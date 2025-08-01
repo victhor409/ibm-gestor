@@ -1,6 +1,6 @@
 package com.ibm.gestor.dtos;
 
-import com.ibm.model.Pessoa;
+import com.ibm.gestor.model.tipoPessoa;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -18,4 +18,8 @@ public class ReceitaDto {
     private BigDecimal valor;
     @NotBlank
     private String origemEntrada;
+    @NotBlank
+    private tipoPessoa tipoPessoa;
+    @NotBlank
+    private Long pessoaId;
 }
