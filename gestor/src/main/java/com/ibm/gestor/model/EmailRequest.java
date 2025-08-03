@@ -1,4 +1,4 @@
-package com.ibm.model;
+package com.ibm.gestor.model;
 
 import lombok.Getter;
 import lombok.Setter;
