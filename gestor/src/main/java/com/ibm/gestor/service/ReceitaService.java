@@ -1,6 +1,8 @@
 package com.ibm.gestor.service;
 
 import com.ibm.gestor.dtos.ReceitaDto;
+import com.ibm.gestor.model.PessoaFisica;
+import com.ibm.gestor.model.PessoaJuridica;
 import com.ibm.gestor.repositories.PessoaFisicaRepository;
 import com.ibm.gestor.repositories.PessoaJuridicaRepository;
 import com.ibm.gestor.repositories.ReceitaRepository;
@@ -25,19 +27,24 @@ public class ReceitaService {
 
     @Transactional
     public Receita save(ReceitaDto receitaDto) {
-        Receita receita = new Receita();
-        receita.setNomeReceita(receitaDto.getNomeReceita());
-        receita.setValor(receitaDto.getValor());
-        receita.setOrigemEntrada(receitaDto.getOrigemEntrada());
-        receita.setDataEntrada(LocalDateTime.now(ZoneId.of("UTC")));
-        receita.setTipoPessoa(receitaDto.getTipoPessoa());
+        Receita receita = Receita.builder()
+        .nomeReceita(receitaDto.getNomeReceita())
+        .valor(receitaDto.getValor())
+        .origemEntrada(receitaDto.getOrigemEntrada())
+        .dataEntrada(LocalDateTime.now(ZoneId.of("UTC")))
+        .tipoPessoa(receitaDto.getTipoPessoa())
+        .build();
 
         switch (receitaDto.getTipoPessoa()) {
             case FISICA -> {
-                receita.setPessoa(pessoaFisicaRepository.findById(receitaDto.getPessoaId()).get());
+                PessoaFisica pessoaFisica = pessoaFisicaRepository.findById(receitaDto.getPessoaId())
+                                .orElseThrow(() -> new RuntimeException("Pessoa Física não encontrada"));
+                receita.setPessoa(pessoaFisica);
             }
             case JURIDICA -> {
-                receita.setPessoa(pessoaJuridicaRepository.findById(receitaDto.getPessoaId()).get());
+                PessoaJuridica pessoaJuridica = pessoaJuridicaRepository.findById(receitaDto.getPessoaId())
+                        .orElseThrow(() -> new RuntimeException("Pessoa Jurídica não encontrada"));
+                receita.setPessoa(pessoaJuridica);
             }
         }
 
