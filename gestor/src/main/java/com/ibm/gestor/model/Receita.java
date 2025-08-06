@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Table(name = "TB_RECEITAS")
 @Getter
 @Setter
-@Builder
+@Builder(toBuilder = true)
 @AllArgsConstructor
 @NoArgsConstructor
 public class Receita {

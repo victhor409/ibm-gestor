@@ -29,6 +29,7 @@ public class PessoaFisicaService {
         return pessoaFisicaRepository.findById(id);
     }
 
+    @Transactional
     public void delete(PessoaFisica pessoaFisica) {
         pessoaFisicaRepository.delete(pessoaFisica);
     }
