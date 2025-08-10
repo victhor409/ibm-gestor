@@ -25,31 +25,56 @@ public class ReceitaController {
 
     @GetMapping
     public ResponseEntity<Page<Receita>> getAllReceitas(@PageableDefault(page = 0, size = 10, sort = "name", direction = Sort.Direction.ASC)Pageable pageable) {
+
         return ResponseEntity.status(HttpStatus.OK).body(receitaService.getAll(pageable));
+
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Object> getOneReceita(@PathVariable(value = "id") Long id) {
         Optional<Receita> receitaOptional = receitaService.getById(id);
+
         if(receitaOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
         }
+
         return ResponseEntity.status(HttpStatus.OK).body(receitaOptional.get());
     }
 
     @PostMapping
     public ResponseEntity<Receita> createReceita(@RequestBody @Valid ReceitaDto receitaDto) {
+
         return ResponseEntity.status(HttpStatus.CREATED).body(receitaService.save(receitaDto));
+
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteReceita(@PathVariable(value = "id") Long id) {
         Optional<Receita> receitaOptional = receitaService.getById(id);
+
         if(receitaOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
         }
+
         receitaService.delete(receitaOptional.get());
+
         return ResponseEntity.status(HttpStatus.OK).body("Receita deletada.");
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateReceita(@PathVariable(value = "id") Long id,
+                                                @RequestBody @Valid ReceitaDto receitaDto) {
+
+        Optional<Receita> receitaOptional = receitaService.getById(id);
+
+        if(receitaOptional.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
+        }
+
+        Receita receitaAtualizada = receitaService.update(id, receitaDto);
+
+        return ResponseEntity.status(HttpStatus.OK).body(receitaAtualizada);
+
     }
 
 }

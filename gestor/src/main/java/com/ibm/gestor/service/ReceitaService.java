@@ -1,11 +1,12 @@
 package com.ibm.gestor.service;
 
 import com.ibm.gestor.dtos.ReceitaDto;
+import com.ibm.gestor.model.*;
 import com.ibm.gestor.repositories.PessoaFisicaRepository;
 import com.ibm.gestor.repositories.PessoaJuridicaRepository;
 import com.ibm.gestor.repositories.ReceitaRepository;
-import com.ibm.gestor.model.Receita;
 import jakarta.transaction.Transactional;
+import jakarta.validation.constraints.NotBlank;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,36 +26,52 @@ public class ReceitaService {
 
     @Transactional
     public Receita save(ReceitaDto receitaDto) {
-        Receita receita = new Receita();
-        receita.setNomeReceita(receitaDto.getNomeReceita());
-        receita.setValor(receitaDto.getValor());
-        receita.setOrigemEntrada(receitaDto.getOrigemEntrada());
-        receita.setDataEntrada(LocalDateTime.now(ZoneId.of("UTC")));
-        receita.setTipoPessoa(receitaDto.getTipoPessoa());
+        Pessoa pessoa = buscarPessoa(receitaDto.getTipoPessoa(), receitaDto.getPessoaId());
 
-        switch (receitaDto.getTipoPessoa()) {
-            case FISICA -> {
-                receita.setPessoa(pessoaFisicaRepository.findById(receitaDto.getPessoaId()).get());
-            }
-            case JURIDICA -> {
-                receita.setPessoa(pessoaJuridicaRepository.findById(receitaDto.getPessoaId()).get());
-            }
-        }
+        Receita receita = Receita.builder()
+                .nomeReceita(receitaDto.getNomeReceita())
+                .valor(receitaDto.getValor())
+                .origemEntrada(receitaDto.getOrigemEntrada())
+                .dataEntrada(LocalDateTime.now(ZoneId.of("UTC")))
+                .tipoPessoa(receitaDto.getTipoPessoa())
+                .pessoa(pessoa)
+                .build();
 
         return receitaRepository.save(receita);
     }
 
-    public Page<Receita> getAll(Pageable pageable) {
-        return receitaRepository.findAll(pageable);
-    }
+    public Page<Receita> getAll(Pageable pageable) { return receitaRepository.findAll(pageable); }
 
-    public Optional<Receita> getById(Long id) {
-        return receitaRepository.findById(id);
-    }
+    public Optional<Receita> getById(Long id) { return receitaRepository.findById(id); }
 
     @Transactional
-    public void delete(Receita receita) {
-        receitaRepository.delete(receita);
+    public void delete(Receita receita) { receitaRepository.delete(receita); }
+
+    @Transactional
+    public Receita update(Long id, ReceitaDto receitaDto) {
+        Receita receitaExistente = receitaRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Receita não encontrada"));
+
+        Pessoa pessoa = buscarPessoa(receitaDto.getTipoPessoa(), receitaDto.getPessoaId());
+
+        Receita receitaAtualizada = receitaExistente.toBuilder()
+                .nomeReceita(receitaDto.getNomeReceita())
+                .valor(receitaDto.getValor())
+                .origemEntrada(receitaDto.getOrigemEntrada())
+                .tipoPessoa(receitaDto.getTipoPessoa())
+                .pessoa(pessoa)
+                .build();
+
+        return receitaRepository.save(receitaAtualizada);
+    }
+
+    private Pessoa buscarPessoa(@NotBlank tipoPessoa tipo, Long id) {
+        return switch (tipo) {
+            case FISICA -> pessoaFisicaRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Pessoa Física não encontrada"));
+            case JURIDICA -> pessoaJuridicaRepository.findById(id)
+                    .orElseThrow(() -> new RuntimeException("Pessoa Jurídica não encontrada"));
+        };
     }
 
 }
