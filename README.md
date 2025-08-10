@@ -1,3 +1,4 @@
+# 💰 Sistema de Controle de Finanças – Igreja Batista do Mirante
 
 Sistema desenvolvido para gerenciar e organizar as finanças da Igreja Batista do Mirante, permitindo o controle de receitas, despesas e relatórios financeiros, com foco em transparência e eficiência.
 
