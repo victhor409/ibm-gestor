@@ -55,6 +55,7 @@ public class ReceitaController {
         if(receitaOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Receita não encontrada");
         }
+
         receitaService.delete(receitaOptional.get());
 
         return ResponseEntity.status(HttpStatus.OK).body("Receita deletada.");
