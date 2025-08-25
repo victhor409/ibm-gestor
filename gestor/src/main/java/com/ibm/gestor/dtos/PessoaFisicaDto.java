@@ -3,6 +3,7 @@ package com.ibm.gestor.dtos;
 
 import com.ibm.gestor.model.sexo;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +21,7 @@ public class PessoaFisicaDto {
     private String telefone;
     @NotBlank
     private String cpf;
-    @NotBlank
+    @NotNull
     private sexo sexo;
 
 }

@@ -20,8 +20,8 @@ public class ReceitaDto {
     private BigDecimal valor;
     @NotBlank
     private String origemEntrada;
-    @NotBlank
+    @NotNull
     private tipoPessoa tipoPessoa;
-    @NotBlank
+    @NotNull
     private Long pessoaId;
 }
