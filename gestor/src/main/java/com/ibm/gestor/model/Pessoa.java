@@ -2,6 +2,7 @@ package com.ibm.gestor.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -18,10 +19,14 @@ public abstract class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @NotBlank
     private String nome;
     @Email(message = "Por favor, forneça um endereço de e-mail válido")
+    @NotBlank
     private String email;
+    @NotBlank
     private String endereco;
+    @NotBlank
     private String telefone;
 
 }

@@ -51,6 +51,7 @@ public class PessoaFisicaController {
     @PutMapping("/{id}")
     public ResponseEntity<Object> updatePessoaFisica(@PathVariable Long id, @RequestBody @Valid PessoaFisica pessoaFisica) {
         Optional<PessoaFisica> pessoaFisicaOptional = pessoaFisicaService.getById(id);
+
         if (pessoaFisicaOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pessoa Física não encontrada!");
         }

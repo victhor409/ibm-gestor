@@ -6,7 +6,6 @@ import com.ibm.gestor.repositories.PessoaFisicaRepository;
 import com.ibm.gestor.repositories.PessoaJuridicaRepository;
 import com.ibm.gestor.repositories.ReceitaRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

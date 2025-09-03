@@ -41,6 +41,7 @@ public class ReceitaController {
         }
 
         return ResponseEntity.status(HttpStatus.OK).body(receitaOptional.get());
+
     }
 
     @PostMapping
