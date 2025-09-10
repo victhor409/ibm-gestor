@@ -19,14 +19,14 @@ public abstract class Pessoa implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @NotBlank
+    @NotBlank(message = "Por favor, forneça um nome válido")
     private String nome;
     @Email(message = "Por favor, forneça um endereço de e-mail válido")
     @NotBlank
     private String email;
-    @NotBlank
+    @NotBlank(message = "Por favor, forneça um endereço válido")
     private String endereco;
-    @NotBlank
+    @NotBlank(message = "Por favor, forneça um telefone válido")
     private String telefone;
 
 }

@@ -2,8 +2,7 @@ package com.ibm.gestor.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -12,6 +11,9 @@ import java.time.LocalDateTime;
 @Table(name = "TB_DESPESAS")
 @Getter
 @Setter
+@Builder(toBuilder = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Despesa {
     @Id
     private Long id;
@@ -19,6 +21,10 @@ public class Despesa {
     private BigDecimal valor;
     private String origemEntrada;
     private LocalDateTime dataEntrada;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private tipoPessoa tipoPessoa;
 
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @ManyToOne(fetch = FetchType.LAZY)

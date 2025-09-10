@@ -2,11 +2,9 @@ package com.ibm.gestor.service;
 
 import com.ibm.gestor.dtos.ReceitaDto;
 import com.ibm.gestor.model.*;
-import com.ibm.gestor.repositories.PessoaFisicaRepository;
-import com.ibm.gestor.repositories.PessoaJuridicaRepository;
+
 import com.ibm.gestor.repositories.ReceitaRepository;
 import jakarta.transaction.Transactional;
-import jakarta.validation.constraints.NotNull;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,15 +14,14 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Optional;
 
+import static com.ibm.gestor.service.Utils.buscarPessoa;
+
 @Service
 public class ReceitaService {
 
     @Autowired
     ReceitaRepository receitaRepository;
-    @Autowired
-    PessoaFisicaRepository pessoaFisicaRepository;
-    @Autowired
-    PessoaJuridicaRepository pessoaJuridicaRepository;
+
 
     @Transactional
     public Receita save(ReceitaDto receitaDto) {
@@ -67,13 +64,5 @@ public class ReceitaService {
         return receitaRepository.save(receitaAtualizada);
     }
 
-    private Pessoa buscarPessoa(@NotNull tipoPessoa tipo, Long id) {
-        return switch (tipo) {
-            case FISICA -> pessoaFisicaRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Pessoa Física não encontrada"));
-            case JURIDICA -> pessoaJuridicaRepository.findById(id)
-                    .orElseThrow(() -> new RuntimeException("Pessoa Jurídica não encontrada"));
-        };
-    }
 
 }
